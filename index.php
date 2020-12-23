@@ -1,19 +1,19 @@
 <?php 
 
-$FLAG = file_get_contents("./flag.txt");
+$FLAG = file_get_contents("/secret/flag.txt");
 
 $password = "";
 if (isset($_GET["password"])) {
 	$password = $_GET["password"];
 }
 
-$pdo = new PDO('sqlite:user.db');
+$pdo = new PDO('sqlite:/secret/user.db');
 
 $query_password = $password;
 $query_password = preg_replace("(')", "\\'", $query_password);
 $query_password = preg_replace("([Oo][Rr]|=|[0-9]| |--)", "", $query_password);
 
-$query = "SELECT * FROM user WHERE name='$admin' AND password='$query_password'";
+$query = "SELECT * FROM user WHERE name='admin' AND password='$query_password'";
 if (isset($_GET["password"])) {
 	echo htmlspecialchars($query, ENT_QUOTES);
 }
