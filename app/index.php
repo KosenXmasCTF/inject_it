@@ -9,9 +9,17 @@ if (isset($_GET["password"])) {
 
 $pdo = new PDO('sqlite:/secret/user.db');
 
+function recursive_replace($pattern, $replacement, $subject) {
+	while (preg_match($pattern, $subject) !== 0) {
+		$subject = preg_replace($pattern, $replacement, $subject);
+	}
+	return $subject;
+}
+
 $query_password = $password;
 $query_password = preg_replace("(')", "\\'", $query_password);
 $query_password = preg_replace("([Oo][Rr]|=|[0-9]| |--)", "", $query_password);
+$query_password = recursive_replace("(password|name)", "", $query_password);
 
 $query = "SELECT * FROM user WHERE name='admin' AND password='$query_password'";
 if (isset($_GET["password"])) {
