@@ -1,13 +1,13 @@
 <?php 
 
-$FLAG = file_get_contents("/secret/flag.txt");
+$FLAG = file_get_contents("/var/www/flag.txt");
 
 $password = "";
 if (isset($_GET["password"])) {
 	$password = $_GET["password"];
 }
 
-$pdo = new PDO('sqlite:/secret/user.db');
+$pdo = new PDO('sqlite:/var/www/user.db');
 
 function recursive_replace($pattern, $replacement, $subject) {
 	while (preg_match($pattern, $subject) !== 0) {

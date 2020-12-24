@@ -1,16 +1,9 @@
 version: '3'
 services:
-  web:
-      build:
-        context: ./nginx
-        dockerfile: ./Dockerfile
-      depends_on:
-          - php
-#      image: '${IMAGE_NAME_NGINX}'
-      ports:
-        - "80:80"
   php:
       build:
         context: ./app
         dockerfile: ./Dockerfile
 #      image: '${IMAGE_NAME_APP}'
+      ports:
+        - "8082:80"
